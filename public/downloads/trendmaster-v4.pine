@@ -1,0 +1,67 @@
+// @version=5
+// ============================================================
+// TrendMaster v4 · 动量爆破量化指标 (Pine Script v5)
+// 盈指量杭州科技有限公司 · 自研源码演示版
+// 策略逻辑：多周期共振动量突破 + 量价确认 + 科学止盈止损
+// 提示：正式购买版本包含完整参数优化与多市场适配配置
+// ============================================================
+indicator("TrendMaster v4 · Momentum Blast [YZL Demo]", overlay=true)
+
+// ─── 输入参数 ───
+fastLen   = input.int(12,  "快线周期",  minval=1)
+slowLen   = input.int(26,  "慢线周期",  minval=1)
+sigLen    = input.int(9,   "信号周期",  minval=1)
+volLen    = input.int(20,  "量能均线周期", minval=1)
+atrLen    = input.int(14,  "ATR 周期",  minval=1)
+tpMult    = input.float(3.0, "止盈倍数 (ATR)", minval=0.5, step=0.1)
+slMult    = input.float(1.5, "止损倍数 (ATR)", minval=0.5, step=0.1)
+minVolRatio = input.float(1.5, "突破最小量能倍数", minval=1.0, step=0.1)
+
+// ─── 核心计算 ───
+fastMa = ta.ema(close, fastLen)
+slowMa = ta.ema(close, slowLen)
+macdLine = fastMa - slowMa
+signalLine = ta.ema(macdLine, sigLen)
+hist = macdLine - signalLine
+
+volMa = ta.sma(volume, volLen)
+atr = ta.atr(atrLen)
+volRatio = volume / volMa
+
+// 动量突破：均线金叉 + 量能放大 + MACD 柱状图转正
+goldenCross = ta.crossover(fastMa, slowMa)
+momentumUp  = hist > 0 and hist[1] <= 0
+volConfirm  = volRatio >= minVolRatio
+breakout    = goldenCross and volConfirm and (momentumUp or hist > 0)
+
+// ─── 绘图 ───
+plot(fastMa, "Fast EMA", color=color.new(#00bcd4, 0))
+plot(slowMa, "Slow EMA", color=color.new(#ff9800, 0))
+
+plotshape(breakout, "动量突破做多", shape.triangleup, location.belowbar,
+     color=color.new(#00e676, 0), size=size.small)
+
+// 止盈止损参考位（按信号触发时的高低点 ± AR 倍数动态绘制）
+var float entryPrice = na
+var float tpPrice   = na
+var float slPrice   = na
+
+if breakout
+    entryPrice := close
+    tpPrice := close + atr * tpMult
+    slPrice := close - atr * slMult
+
+plot(entryPrice, "入场参考", color=color.new(#ffffff, 0), style=plot.style_circles)
+plot(tpPrice, "第一止盈", color=color.new(#00e676, 0), style=plot.style_linebr)
+plot(slPrice, "严格止损", color=color.new(#ff5252, 0), style=plot.style_linebr)
+
+// 背景着色：多头动量区域
+bgcolor(hist > 0 and volRatio >= minVolRatio ? color.new(#00e676, 90) : na)
+
+// ─── 警报 ───
+alertcondition(breakout, "TrendMaster 突破警报", "TrendMaster v4 检测到动量爆破做多信号！")
+
+// ────────────────────────────────────────────────────────────
+// 盈指量 · 多周期共振动量突破 V4 (演示版)
+// 完整版包含：A股/加密货币参数包、Python 信号推送、回测报告
+// 联系：contact@yingzhiliang.com
