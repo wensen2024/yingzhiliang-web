@@ -245,7 +245,7 @@ export const FX = { usdt: 7.25, eth: 18500, btc: 680000 };
 // 公司信息
 export const COMPANY = {
   nameShort: "Yingzhiliang Tech",
-  email: "contact@yingzhiliang.com",
+  emails: ["121126652@qq.com", "121126652qq@gmail.com"],
   hotline: "400-880-YING",
   icp: "Zhejiang ICP Bei 20248888 No.-1",
 };

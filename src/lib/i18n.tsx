@@ -30,7 +30,7 @@ export interface I18nValue {
 const I18nContext = createContext<I18nValue | null>(null);
 
 function detectLocale(): Locale {
-  if (typeof window === "undefined") return "zh-CN";
+  if (typeof window === "undefined") return "en";
   try {
     const saved = window.localStorage.getItem(STORAGE_KEY);
     if (saved && LOCALES.some((l) => l.code === saved)) {
@@ -42,11 +42,11 @@ function detectLocale(): Locale {
   } catch {
     /* ignore */
   }
-  return "zh-CN";
+  return "en";
 }
 
 export function I18nProvider({ children }: { children: ReactNode }) {
-  const [locale, setLocaleState] = useState<Locale>("zh-CN");
+  const [locale, setLocaleState] = useState<Locale>("en");
 
   // 挂载后再探测本地/浏览器语言，避免 SSR 水合不一致
   useEffect(() => {

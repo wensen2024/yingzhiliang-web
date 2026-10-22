@@ -37,8 +37,6 @@ export interface LocaleMeta {
 }
 
 export const LOCALES: LocaleMeta[] = [
-  { code: "zh-CN", label: "简体中文", english: "Chinese (Simplified)", dir: "ltr" },
-  { code: "zh-TW", label: "繁體中文", english: "Chinese (Traditional)", dir: "ltr" },
   { code: "en", label: "English", english: "English", dir: "ltr" },
   { code: "ja", label: "日本語", english: "Japanese", dir: "ltr" },
   { code: "ko", label: "한국어", english: "Korean", dir: "ltr" },
@@ -435,7 +433,7 @@ const zhCN: Dict = {
   "foot.btcLabel": "Bitcoin 收款地址：",
   "foot.contactTitle": "商务与客服中心",
   "foot.address": "浙江省杭州市高新区 / 软件产业创新基地",
-  "foot.email": "contact@yingzhiliang.com",
+  "foot.email": "121126652@qq.com · 121126652qq@gmail.com",
   "foot.hotline": "VIP尊享客服热线：400-880-YING",
   "foot.hours": "服务时间：7×24小时 线上全天候量化监控与技术响应",
   "foot.risk": "数字资产与金融衍生品交易存在较高市场波动风险。盈指量杭州科技有限公司所提供的全部量化指标、回测模型、策略源码及技术咨询，仅作为计算机量化分析辅助参考工具，不构成任何保本投资收益承诺或定向投顾建议。用户需结合自身风险承受能力独立决策，自负盈亏。",
@@ -824,7 +822,7 @@ const en: Dict = {
   "foot.btcLabel": "Bitcoin address:",
   "foot.contactTitle": "Business & support",
   "foot.address": "Hi-Tech Zone / Software Industry Innovation Base, Hangzhou, Zhejiang",
-  "foot.email": "contact@yingzhiliang.com",
+  "foot.email": "121126652@qq.com · 121126652qq@gmail.com",
   "foot.hotline": "VIP hotline: 400-880-YING",
   "foot.hours": "Service: 7×24 quant monitoring & tech response",
   "foot.risk": "Risk notice: digital asset and financial derivatives trading carries significant market volatility risk. All quant indicators, backtest models, strategy source code and technical consulting provided by Yingzhiliang Hangzhou Technology Co., Ltd. are computer-aided analysis reference tools only — they do not constitute any principal-protected return promise or directed investment advice. Users must decide independently based on their own risk tolerance and bear their own profit or loss.",
@@ -1526,8 +1524,8 @@ const PARTIAL: Record<Exclude<Locale, "zh-CN" | "en">, Dict> = {
 /** 各语言缺失 key 的回退语言 */
 const FALLBACK: Record<Locale, Locale> = {
   "zh-CN": "en",
-  en: "zh-CN",
-  "zh-TW": "zh-CN",
+  en: "en",
+  "zh-TW": "en",
   ja: "en",
   ko: "en",
   fr: "en",

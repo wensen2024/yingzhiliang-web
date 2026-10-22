@@ -95,10 +95,12 @@ export function CompanyFooter() {
                 <MapPin className="w-4 h-4 text-emerald-400 flex-shrink-0" />
                 <span>{t("foot.address")}</span>
               </div>
-              <div className="flex items-center gap-2">
-                <Mail className="w-4 h-4 text-blue-400 flex-shrink-0" />
-                <span>{COMPANY.email}</span>
-              </div>
+              {COMPANY.emails.map((email) => (
+                <div key={email} className="flex items-center gap-2">
+                  <Mail className="w-4 h-4 text-blue-400 flex-shrink-0" />
+                  <a href={`mailto:${email}`} className="hover:text-blue-300 transition-colors">{email}</a>
+                </div>
+              ))}
               <div className="flex items-center gap-2">
                 <Phone className="w-4 h-4 text-amber-400 flex-shrink-0" />
                 <span>{COMPANY.hotline}</span>
