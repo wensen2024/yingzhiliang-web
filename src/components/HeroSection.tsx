@@ -112,9 +112,6 @@ export function HeroSection({ onOpenPaymentHub, todayRevenue, dailyTarget }: Her
             </div>
 
             <div className="mt-3 flex flex-wrap items-center justify-between text-xs text-slate-400">
-              <span className="flex items-center gap-1 text-emerald-400">
-                <CheckCircle2 className="w-3.5 h-3.5" /> {t("hero.alipayCheck")}
-              </span>
               <span className="flex items-center gap-1 text-purple-400">
                 <CheckCircle2 className="w-3.5 h-3.5" /> {t("hero.ethCheck")}
               </span>

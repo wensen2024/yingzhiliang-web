@@ -7,8 +7,6 @@ import { useI18n } from "@/lib/i18n";
 import {
   ETH_ADDRESS,
   BTC_ADDRESS,
-  ALIPAY_PAY_URL,
-  ALIPAY_COMPANY_MASKED,
   FX,
 } from "@/lib/site-data";
 import {
@@ -43,7 +41,7 @@ export function PaymentCards({
 }: PaymentCardsProps) {
   const { t } = useI18n();
   const productName = presetProduct ?? t("hub.defaultProduct");
-  const [activeTab, setActiveTab] = useState<"alipay" | "eth" | "btc">("alipay");
+  const [activeTab, setActiveTab] = useState<"eth" | "btc">("eth");
   const [selectedAmount, setSelectedAmount] = useState<number>(presetAmount);
   const [customAmount, setCustomAmount] = useState<string>("");
   const [copiedType, setCopiedType] = useState<string | null>(null);
@@ -62,13 +60,6 @@ export function PaymentCards({
   const usdtApprox = (effectiveAmount / FX.usdt).toFixed(2);
   const ethApprox = (effectiveAmount / FX.eth).toFixed(4);
   const btcApprox = (effectiveAmount / FX.btc).toFixed(6);
-
-  const qrPayload =
-    activeTab === "eth"
-      ? ETH_ADDRESS
-      : activeTab === "btc"
-      ? BTC_ADDRESS
-      : ALIPAY_PAY_URL;
 
   const handleCopy = (text: string, type: string) => {
     navigator.clipboard.writeText(text);
@@ -101,15 +92,15 @@ export function PaymentCards({
       const licenseKey = generateLicenseKey();
       const order: StoredOrder = {
         orderNo: generateOrderNo(),
-        customerName: customerName || (activeTab === "alipay" ? "支付宝用户" : "加密交易员"),
+        customerName: customerName || "加密交易员",
         customerContact,
         productId: presetProductId,
         productName,
         amount: effectiveAmount,
-        currency: activeTab === "alipay" ? "CNY" : activeTab.toUpperCase(),
+        currency: activeTab.toUpperCase(),
         cryptoAmount: cryptoAmt,
         paymentMethod: activeTab,
-        paymentProof: paymentProof || (activeTab === "alipay" ? "支付宝已扫码付款" : "Web3链上支付转账"),
+        paymentProof: paymentProof || "Web3链上支付转账",
         status: "completed",
         licenseKey,
         deliveryContent: `${t("pc.license")}${licenseKey} · ${t("look.status")}`,
@@ -184,20 +175,6 @@ export function PaymentCards({
       {/* Tabs */}
       <div className="flex border-b border-slate-800 mb-6">
         <button
-          onClick={() => setActiveTab("alipay")}
-          className={`flex-1 pb-3 text-sm font-bold flex items-center justify-center gap-2 transition-all border-b-2 cursor-pointer ${
-            activeTab === "alipay"
-              ? "border-blue-500 text-blue-400"
-              : "border-transparent text-slate-400 hover:text-slate-200"
-          }`}
-        >
-          <div className="w-5 h-5 rounded bg-blue-500 flex items-center justify-center text-white text-xs font-bold">
-            支
-          </div>
-          <span>{t("pc.tabAlipay")}</span>
-        </button>
-
-        <button
           onClick={() => setActiveTab("eth")}
           className={`flex-1 pb-3 text-sm font-bold flex items-center justify-center gap-2 transition-all border-b-2 cursor-pointer ${
             activeTab === "eth"
@@ -230,58 +207,6 @@ export function PaymentCards({
       <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-start">
         {/* QR Code Presentation Column (5 cols) */}
         <div className="md:col-span-5 flex flex-col items-center">
-          {/* Alipay Card */}
-          {activeTab === "alipay" && (
-            <div className="w-full max-w-[320px] rounded-2xl overflow-hidden bg-white text-slate-900 shadow-2xl border-4 border-blue-500/80">
-              {/* Alipay Blue Header */}
-              <div className="bg-[#1677ff] text-white px-4 py-4 text-center">
-                <div className="flex items-center justify-center gap-2 mb-1">
-                  <div className="w-7 h-7 bg-white text-[#1677ff] rounded-lg flex items-center justify-center font-black text-sm">
-                    支
-                  </div>
-                  <span className="text-xl font-bold tracking-wide">{t("pay.alipayHeader")}</span>
-                </div>
-                <div className="text-base font-extrabold tracking-wider">
-                  {t("pay.alipaySlogan")}
-                </div>
-              </div>
-
-              {/* QR Code Area with Red Bull Logo */}
-              <div className="p-5 flex flex-col items-center bg-white">
-                <div className="relative w-56 h-56 rounded-xl border-2 border-slate-200 p-2 bg-white flex items-center justify-center">
-                  <QrImage
-                    text={ALIPAY_PAY_URL}
-                    alt={t("pay.alipayHeader")}
-                    className="w-full h-full object-contain"
-                  />
-                  {/* Center Bull badge */}
-                  <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-                    <div className="w-10 h-10 rounded-lg bg-red-600 border-2 border-white shadow-md flex items-center justify-center text-white">
-                      <Zap className="w-5 h-5 fill-white text-white" />
-                    </div>
-                  </div>
-                </div>
-
-                <div className="mt-3 text-center">
-                  <div className="text-sm font-bold text-slate-800">
-                    {ALIPAY_COMPANY_MASKED}
-                  </div>
-                  <div className="text-xs text-blue-600 font-semibold mt-1">
-                    {t("pay.alipayScan")}
-                  </div>
-                </div>
-              </div>
-
-              {/* Amount badge on bottom */}
-              <div className="bg-slate-50 border-t border-slate-200 px-4 py-2 text-center text-xs text-slate-600 flex items-center justify-between">
-                <span>{t("pc.actualPay")}</span>
-                <span className="text-base font-black text-red-600">
-                  ¥{effectiveAmount.toFixed(2)}
-                </span>
-              </div>
-            </div>
-          )}
-
           {/* Ethereum Card */}
           {activeTab === "eth" && (
             <div className="w-full max-w-[320px] rounded-2xl overflow-hidden bg-slate-900 text-white shadow-2xl border-2 border-purple-500/60 p-5">
@@ -479,15 +404,11 @@ export function PaymentCards({
 
             <div>
               <label className="block text-xs font-semibold text-slate-300 mb-1">
-                {activeTab === "alipay" ? t("pc.proofAlipayLabel") : t("pc.proofCryptoLabel")}
+                {t("pc.proofCryptoLabel")}
               </label>
               <input
                 type="text"
-                placeholder={
-                  activeTab === "alipay"
-                    ? t("pc.proofAlipayPlaceholder")
-                    : t("pc.proofCryptoPlaceholder")
-                }
+                placeholder={t("pc.proofCryptoPlaceholder")}
                 value={paymentProof}
                 onChange={(e) => setPaymentProof(e.target.value)}
                 className="w-full px-3 py-2 text-xs font-mono rounded-lg bg-slate-950 border border-slate-700 text-white placeholder-slate-500 focus:outline-none focus:border-emerald-400"

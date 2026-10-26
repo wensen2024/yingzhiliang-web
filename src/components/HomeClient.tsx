@@ -102,7 +102,7 @@ export function HomeClient({
         {/* Interactive Revenue Simulator */}
         <RevenueSimulator onOpenPaymentHub={handleOpenGeneralPayment} />
 
-        {/* Official QR Payment Station (Alipay, ETH, BTC) */}
+        {/* Official crypto payment station (ETH, BTC) */}
         <PaymentStationSection />
       </main>
 

@@ -3,7 +3,7 @@
 import React from "react";
 import { TrendingUp, ShieldCheck, Mail, MapPin, Phone } from "lucide-react";
 import { useI18n } from "@/lib/i18n";
-import { COMPANY, ETH_ADDRESS, BTC_ADDRESS, ALIPAY_COMPANY_MASKED } from "@/lib/site-data";
+import { COMPANY, ETH_ADDRESS, BTC_ADDRESS } from "@/lib/site-data";
 
 export function CompanyFooter() {
   const { t } = useI18n();
@@ -68,10 +68,6 @@ export function CompanyFooter() {
           <div>
             <h4 className="text-sm font-bold text-white mb-3">{t("foot.payTitle")}</h4>
             <ul className="space-y-2 text-xs">
-              <li className="flex flex-col">
-                <span className="text-blue-400 font-semibold">{t("foot.alipayLabel")}</span>
-                <span className="text-slate-300 font-medium">{ALIPAY_COMPANY_MASKED}</span>
-              </li>
               <li className="flex flex-col">
                 <span className="text-purple-400 font-semibold">{t("foot.ethLabel")}</span>
                 <span className="font-mono text-[11px] text-slate-400 break-all">

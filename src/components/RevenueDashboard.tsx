@@ -126,18 +126,7 @@ export function RevenueDashboard({ onOpenPaymentHub, onRefreshTrigger }: Revenue
               </div>
 
               {/* Breakdown by Payment Channel */}
-              <div className="grid grid-cols-3 gap-3 mt-6 pt-6 border-t border-slate-800/80">
-                <div className="p-3 rounded-xl bg-slate-950/70 border border-slate-800">
-                  <div className="text-[11px] text-blue-400 font-semibold flex items-center gap-1">
-                    <span className="w-2 h-2 rounded-full bg-blue-500" />
-                    {t("dash.alipay")}
-                  </div>
-                  <div className="text-lg font-black text-white mt-0.5">
-                    ¥{(stats?.paymentBreakdown.alipay ?? 998).toFixed(2)}
-                  </div>
-                  <div className="text-[10px] text-slate-400">{t("dash.alipaySub")}</div>
-                </div>
-
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-6 pt-6 border-t border-slate-800/80">
                 <div className="p-3 rounded-xl bg-slate-950/70 border border-slate-800">
                   <div className="text-[11px] text-purple-400 font-semibold flex items-center gap-1">
                     <span className="w-2 h-2 rounded-full bg-purple-500" />

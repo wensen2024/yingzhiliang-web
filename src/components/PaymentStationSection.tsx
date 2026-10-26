@@ -1,9 +1,9 @@
 "use client";
 
 import React, { useState } from "react";
-import { QrCode, ShieldCheck, Copy, Check, Zap, Building2, Wallet } from "lucide-react";
+import { QrCode, Copy, Check } from "lucide-react";
 import { useI18n } from "@/lib/i18n";
-import { ETH_ADDRESS, BTC_ADDRESS, ALIPAY_PAY_URL, ALIPAY_COMPANY_MASKED } from "@/lib/site-data";
+import { ETH_ADDRESS, BTC_ADDRESS } from "@/lib/site-data";
 import { QrImage } from "./QrImage";
 
 export function PaymentStationSection() {
@@ -34,57 +34,7 @@ export function PaymentStationSection() {
         </div>
 
         {/* 3 Payment Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-          {/* Card 1: Alipay */}
-          <div className="rounded-2xl overflow-hidden bg-white text-slate-900 shadow-2xl border-4 border-blue-500 flex flex-col justify-between">
-            <div>
-              {/* Alipay Blue Header */}
-              <div className="bg-[#1677ff] text-white px-5 py-4 text-center">
-                <div className="flex items-center justify-center gap-2 mb-1">
-                  <div className="w-7 h-7 bg-white text-[#1677ff] rounded-lg flex items-center justify-center font-black text-sm">
-                    支
-                  </div>
-                  <span className="text-xl font-bold tracking-wide">{t("pay.alipayHeader")}</span>
-                </div>
-                <div className="text-base font-extrabold tracking-wider">
-                  {t("pay.alipaySlogan")}
-                </div>
-              </div>
-
-              {/* QR Code Container */}
-              <div className="p-6 flex flex-col items-center bg-white">
-                <div className="relative w-52 h-52 rounded-xl border border-slate-200 p-2 bg-white flex items-center justify-center shadow-inner">
-                  <QrImage
-                    text={ALIPAY_PAY_URL}
-                    alt={t("pay.alipayHeader")}
-                    className="w-full h-full object-contain"
-                  />
-                  {/* Center Bull badge */}
-                  <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-                    <div className="w-9 h-9 rounded-lg bg-red-600 border-2 border-white shadow-md flex items-center justify-center text-white">
-                      <Zap className="w-5 h-5 fill-white text-white" />
-                    </div>
-                  </div>
-                </div>
-
-                <div className="mt-4 text-center">
-                  <div className="text-sm font-bold text-slate-900">
-                    {ALIPAY_COMPANY_MASKED}
-                  </div>
-                  <div className="text-xs text-blue-600 font-bold mt-1">
-                    {t("pay.alipayScan")}
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="bg-slate-50 border-t border-slate-200 p-3 text-center text-xs text-slate-600">
-              <span className="inline-flex items-center gap-1 text-emerald-600 font-semibold">
-                <ShieldCheck className="w-3.5 h-3.5" /> {t("pay.alipayVerified")}
-              </span>
-            </div>
-          </div>
-
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
           {/* Card 2: Ethereum */}
           <div className="rounded-2xl overflow-hidden bg-slate-900 text-white shadow-2xl border-2 border-purple-500/60 p-6 flex flex-col justify-between">
             <div>

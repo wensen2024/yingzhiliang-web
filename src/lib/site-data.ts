@@ -3,11 +3,9 @@
  * 文案类内容全部走 i18n 翻译字典，本文件仅存放非本地化字段。
  */
 
-// ─── 官方收款账户 ───
+// ─── 官方加密货币收款账户 ───
 export const ETH_ADDRESS = "0xFCbA8F85BA8F868B53CFB14dE5362f7822B39f4D";
 export const BTC_ADDRESS = "bc1qat87yet7dsyjumlk94c5r0wwwwde6wtedpxq";
-export const ALIPAY_PAY_URL = "https://qr.alipay.com/fkx19873yzlhangzhou_pay";
-export const ALIPAY_COMPANY_MASKED = "盈指量(***(**)*****司)";
 
 // ─── 产品目录（文案见 i18n translations.products） ───
 export interface Product {
