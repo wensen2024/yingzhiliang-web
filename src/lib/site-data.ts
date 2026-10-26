@@ -3,7 +3,7 @@
  * 文案类内容全部走 i18n 翻译字典，本文件仅存放非本地化字段。
  */
 
-// ─── 官方加密货币收款账户 ───
+// ─── 当前收款方式：ETH / BTC ───
 export const ETH_ADDRESS = "0xFCbA8F85BA8F868B53CFB14dE5362f7822B39f4D";
 export const BTC_ADDRESS = "bc1qat87yet7dsyjumlk94c5r0wwwwde6wtedpxq";
 
