@@ -4,6 +4,7 @@
  */
 
 // ─── 当前收款方式：ETH / BTC ───
+// 当前公开页面仅展示 ETH 与 BTC 收款方式。
 export const ETH_ADDRESS = "0xFCbA8F85BA8F868B53CFB14dE5362f7822B39f4D";
 export const BTC_ADDRESS = "bc1qat87yet7dsyjumlk94c5r0wwwwde6wtedpxq";
 
